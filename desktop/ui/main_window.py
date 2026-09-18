@@ -124,6 +124,9 @@ class MainWindow:
         DarkButton(btn_row, "SETTINGS",
                    command=self._open_settings
                    ).pack(side="left", padx=2)
+        DarkButton(btn_row, "ABOUT & LEGAL",
+                   command=self._open_about
+                   ).pack(side="left", padx=2)
 
         horizontal_separator(self.root).pack(fill="x")
 
@@ -323,6 +326,7 @@ class MainWindow:
             ("EVIDENCE",    self._open_reports),
             ("SEARCH",      self._open_search),
             ("AUDIT TRAIL", self._open_audit),
+            ("ABOUT & LEGAL", self._open_about),
         ]
 
         for label, cmd in buttons:
@@ -609,6 +613,11 @@ class MainWindow:
     def _open_settings(self) -> None:
         from ui.settings_window import SettingsWindow
         SettingsWindow(self.root)
+
+    def _open_about(self) -> None:
+        """Owner details, social profiles and the bundled legal documents."""
+        from ui.about_window import AboutWindow
+        AboutWindow(self.root)
 
 
 # ─── Session Picker Dialog ────────────────────────────────────────────────────
