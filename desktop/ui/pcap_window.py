@@ -19,14 +19,10 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import queue
 import pathlib
-import threading
-import datetime
 
 from config.theme import (
-    BG_DARK, BG_CARD, BG_INPUT, BG_SELECTED,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS,
-    FG_WARNING, FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
+    BG_DARK, BG_CARD, FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_MUTED,
+    FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
     PAD_OUTER, PAD_INNER, PAD_SMALL,
 )
 from ui.widgets import DarkButton, StatusBar, horizontal_separator, section_header
@@ -338,7 +334,6 @@ class PcapWindow:
         # peek at the queue without blocking
         done = False
         try:
-            import queue as Q
             # We can't peek non-destructively, so we watch the progress label
             # The pcap_done message is consumed by the capture window's _poll_queue
             # We detect completion via progress reaching 100%

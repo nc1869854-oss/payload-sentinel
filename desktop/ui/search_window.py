@@ -15,13 +15,12 @@ import tkinter as tk
 from tkinter import ttk
 
 from config.theme import (
-    BG_DARK, BG_CARD, BG_INPUT, BG_SELECTED,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
+    BG_DARK, BG_CARD, FG_SECONDARY, FG_ACCENT, FG_MUTED,
+    FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
     PAD_OUTER, PAD_INNER, PAD_SMALL,
     SEVERITY_COLORS,
 )
-from ui.widgets import DarkButton, StatusBar, horizontal_separator, section_header
+from ui.widgets import DarkButton, StatusBar, horizontal_separator
 from evidence.database import global_search
 from config.logger import get_logger
 

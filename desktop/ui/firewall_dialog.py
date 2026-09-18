@@ -13,15 +13,14 @@ from tkinter import ttk, messagebox
 
 from config.theme import (
     BG_DARK, BG_CARD, BG_INPUT,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_DANGER, FG_MUTED,
+    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_DANGER, FG_MUTED,
     FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
     PAD_OUTER, PAD_INNER, PAD_SMALL,
 )
-from ui.widgets import DarkButton, horizontal_separator, section_header
+from ui.widgets import DarkButton, horizontal_separator
 from firewall.windows_firewall import (
     IS_WINDOWS, list_application_rules, remove_rule,
-    block_outbound, block_inbound, is_ip_blocked,
-    check_admin_privileges, RULE_PREFIX,
+    block_outbound, block_inbound, check_admin_privileges, RULE_PREFIX,
 )
 
 

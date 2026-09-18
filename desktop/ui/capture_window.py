@@ -24,22 +24,19 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import queue
 import socket
-import datetime
 
 from config.theme import (
     BG_DARK, BG_CARD, BG_INPUT,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_DANGER,
-    FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
-    CAPTURE_WINDOW_SIZE, RISK_COLORS,
+    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_MUTED,
+    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
+    CAPTURE_WINDOW_SIZE,
 )
 from ui.widgets import (
     DarkButton, StatusBar, MonoText, build_packet_table,
     horizontal_separator, detail_row, section_header, risk_color,
 )
 from capture.engine import CaptureEngine, get_available_interfaces, SCAPY_AVAILABLE
-from capture.filters import translate_filter, FILTER_SUGGESTIONS
+from capture.filters import translate_filter
 from packets.parser import parse_packet, get_payload_bytes
 from packets.payload import analyse_payload
 from flows.tracker import FlowTracker

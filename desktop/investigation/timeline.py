@@ -12,8 +12,6 @@ The timeline turns raw packet data into analyst-readable events like:
 This gives analysts a story of what happened, not just a table of numbers.
 """
 
-import datetime
-from collections import defaultdict
 
 
 # Event type labels — used for filtering in the timeline UI

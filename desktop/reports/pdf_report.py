@@ -8,7 +8,6 @@ the application continues to work; only PDF export is disabled.
 """
 
 import pathlib
-import datetime
 from evidence.sessions import format_bytes
 
 try:

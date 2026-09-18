@@ -19,11 +19,9 @@ from tkinter import ttk, messagebox, filedialog
 import pathlib
 
 from config.theme import (
-    BG_DARK, BG_CARD, BG_INPUT, BG_SELECTED,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_MUTED,
+    BG_DARK, BG_CARD, BG_INPUT, FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_MUTED,
     FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
-    SETTINGS_WINDOW_SIZE,
+    PAD_OUTER, PAD_INNER, PAD_SMALL, SETTINGS_WINDOW_SIZE,
 )
 from ui.widgets import DarkButton, StatusBar, horizontal_separator, section_header
 import config.settings as settings

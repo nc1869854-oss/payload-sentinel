@@ -20,17 +20,16 @@ import datetime
 from config.theme import (
     BG_DARK, BG_CARD, BG_INPUT, BG_SELECTED,
     FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS,
-    FG_WARNING, FG_DANGER, FG_INFO, FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
+    FG_WARNING, FG_INFO, FG_MUTED,
+    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
     ALERT_WINDOW_SIZE, SEVERITY_COLORS,
 )
 from ui.widgets import (
     DarkButton, StatusBar, horizontal_separator,
-    section_header, severity_color,
+    section_header,
 )
 from analysis.rules import run_all_rules, severity_sort_key
-from evidence.database import insert_alert, get_alerts, insert_note, update_finding_state, get_findings, log_action
+from evidence.database import insert_alert, insert_note, update_finding_state, log_action
 
 
 # Severity display order (most severe first)

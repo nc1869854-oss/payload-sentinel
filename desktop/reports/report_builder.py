@@ -19,9 +19,9 @@ The caller passes a sections dict to control which sections appear:
 import datetime
 from evidence.database import (
     get_session, get_packets, get_flows, get_alerts,
-    get_notes, get_session_statistics,
+    get_notes,
 )
-from evidence.sessions import format_bytes, format_duration
+from evidence.sessions import format_duration
 from analysis.statistics import build_session_summary
 from analysis.rules import run_all_rules, severity_sort_key
 from investigation.timeline import build_timeline_events

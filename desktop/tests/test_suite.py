@@ -427,7 +427,6 @@ class TestDatabase(unittest.TestCase):
 
     def setUp(self):
         """Use an in-memory SQLite database for testing."""
-        import sqlite3
         import evidence.database as db
         # Redirect to temp file for this test
         self._orig_path = db.DB_PATH

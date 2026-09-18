@@ -21,16 +21,12 @@ This window is read-only — it is a record, not an editor.
 import tkinter as tk
 from tkinter import ttk, filedialog
 import csv
-import pathlib
-import datetime
 
 from config.theme import (
-    BG_DARK, BG_CARD, BG_INPUT,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL,
+    BG_DARK, BG_CARD, FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_MUTED,
+    FONT_CARD_TITLE, FONT_SMALL, PAD_OUTER, PAD_INNER, PAD_SMALL,
 )
-from ui.widgets import DarkButton, StatusBar, horizontal_separator, section_header
+from ui.widgets import DarkButton, StatusBar, horizontal_separator
 from evidence.database import get_action_log
 from config.logger import get_logger
 

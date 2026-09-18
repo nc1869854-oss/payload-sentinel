@@ -13,14 +13,10 @@ lets them continue anyway.
 """
 
 import tkinter as tk
-from tkinter import ttk
 
 from config.theme import (
-    BG_DARK, BG_CARD, BG_INPUT,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_DANGER,
-    FG_MUTED,
-    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL,
+    BG_DARK, BG_CARD, FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_MUTED,
+    FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, PAD_OUTER, PAD_INNER, PAD_SMALL,
 )
 from ui.widgets import DarkButton, horizontal_separator
 from core.startup import StartupResult

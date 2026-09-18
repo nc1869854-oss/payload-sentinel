@@ -20,7 +20,6 @@ Architecture:
 
 import threading
 import queue
-import time
 
 
 try:

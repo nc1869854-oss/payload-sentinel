@@ -14,8 +14,6 @@ Anyone can set any PTR record. We never automatically label an IP as
 
 import ipaddress
 import socket
-import datetime
-from collections import defaultdict
 
 
 # ─── IP Classification ────────────────────────────────────────────────────────

@@ -15,8 +15,6 @@ import csv
 import io
 import pathlib
 import zipfile
-import datetime
-from evidence.sessions import format_bytes
 
 
 def generate_csv_export(report_data: dict,

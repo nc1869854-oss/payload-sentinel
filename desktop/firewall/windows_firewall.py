@@ -25,7 +25,6 @@ the UI shows an explanatory message instead of crashing.
 
 import subprocess
 import sys
-import re
 
 
 # ── Platform check ────────────────────────────────────────────────────────────

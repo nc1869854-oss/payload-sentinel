@@ -10,7 +10,6 @@ opened in any browser without an internet connection.
 The report follows the section structure defined in report_builder.py.
 """
 
-import datetime
 import pathlib
 from evidence.sessions import format_bytes
 
@@ -512,7 +511,7 @@ Severity indicates investigation priority, not certainty of threat.</em>
         ).fetchall()
         conn.close()
 
-        parts.append(f"""<div class="section">
+        parts.append("""<div class="section">
 <h2>Evidence Files &amp; Hashes</h2>""")
 
         if not rows:

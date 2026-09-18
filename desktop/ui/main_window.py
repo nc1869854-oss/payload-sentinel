@@ -16,26 +16,22 @@ Session lifecycle (new / open / close) is in the header.
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-import datetime
 
 from config.theme import (
     BG_DARK, BG_CARD, BG_HEADER,
-    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_DANGER,
-    FG_MUTED,
-    FONT_HEADER, FONT_SUBHEADER, FONT_LABEL, FONT_BODY, FONT_CARD_TITLE,
+    FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS, FG_WARNING, FG_MUTED,
+    FONT_HEADER, FONT_SUBHEADER, FONT_BODY, FONT_CARD_TITLE,
     FONT_SMALL, FONT_MONO,
     PAD_OUTER, PAD_INNER, PAD_SMALL,
-    MAIN_WINDOW_SIZE, STATUS_ACTIVE, STATUS_IDLE,
-    SEVERITY_COLORS,
+    MAIN_WINDOW_SIZE, SEVERITY_COLORS,
 )
 from ui.widgets import (
     apply_dark_theme, DarkButton, MetricCard,
     StatusBar, horizontal_separator,
 )
 from evidence import database as db
-from evidence.sessions import format_bytes, format_duration
-from core.session import InvestigationSession, SessionStatus, CaptureSource
-import config.settings as settings
+from evidence.sessions import format_bytes
+from core.session import InvestigationSession, SessionStatus
 from config.logger import get_logger
 
 log = get_logger(__name__)

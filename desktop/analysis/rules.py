@@ -22,6 +22,10 @@ Adding a new rule:
 from collections import defaultdict, Counter
 import datetime
 
+from config.logger import get_logger
+
+log = get_logger(__name__)
+
 
 # ─── Finding builder ──────────────────────────────────────────────────────────
 
@@ -335,11 +339,35 @@ def check_protocol_port_mismatch(packets: list[dict],
     # This rule looks for non-TLS flows on port 443 with payload_size > 0.
     findings = []
 
-    non_tls_443 = [
+    # Port 443 is a TCP port; anything else there is a protocol mismatch.
+    wrong_proto_443 = [
         f for f in flows
         if (f.get("dst_port") == 443 or f.get("src_port") == 443)
-        and f.get("protocol") not in ("TCP",)  # expect TCP on 443
+        and f.get("protocol") not in ("TCP", "TLS", "UNKNOWN", None)
     ]
+
+    if wrong_proto_443:
+        findings.append(_make_finding(
+            severity="MEDIUM",
+            title="Unexpected protocol on the HTTPS port",
+            description=(
+                f"{len(wrong_proto_443)} conversations used port 443 with a "
+                "protocol other than TCP. Secure web traffic is always TCP, so "
+                "something else is being carried over a port that firewalls "
+                "usually leave open."
+            ),
+            evidence=[
+                f"Conversations affected: {len(wrong_proto_443)}",
+                "Protocols seen: " + ", ".join(sorted({
+                    str(f.get("protocol")) for f in wrong_proto_443
+                })),
+            ],
+            recommendation=(
+                "Inspect these conversations. Non-TCP traffic on port 443 is a "
+                "known way to tunnel data past simple firewall rules."
+            ),
+            related_ip=wrong_proto_443[0].get("dst_ip"),
+        ))
 
     # More useful: flag flows on 443 that transferred very little data
     # (could be failed TLS or non-TLS traffic)
@@ -543,6 +571,15 @@ RULES: list = [
     check_non_standard_ports,
 ]
 
+# Advanced behaviour-based rules (beaconing, scanning, exfiltration, entropy,
+# DNS tunnelling, off-hours activity) live in analysis/advanced_rules.py and are
+# appended here so run_all_rules() covers everything.
+try:
+    from analysis.advanced_rules import ADVANCED_RULES, score_findings  # noqa: F401
+    RULES.extend(ADVANCED_RULES)
+except Exception as _exc:                                 # pragma: no cover
+    print(f"[Rules] Advanced rules unavailable: {_exc}")
+
 
 # ─── Rule runner ──────────────────────────────────────────────────────────────
 
@@ -561,7 +598,7 @@ def run_all_rules(packets: list[dict], flows: list[dict]) -> list[dict]:
             all_findings.extend(results)
         except Exception as e:
             # Log but continue — a broken rule must not crash the application
-            print(f"[Rules] Rule '{rule_func.__name__}' raised an error: {e}")
+            log.warning("Rule %s raised an error: %s", rule_func.__name__, e)
 
     return all_findings
 

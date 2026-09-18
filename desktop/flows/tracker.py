@@ -11,7 +11,6 @@ This transforms the raw packet stream into something more investigable:
 instead of 10,000 individual packets, an analyst sees 40 conversations.
 """
 
-import datetime
 from collections import defaultdict
 
 
