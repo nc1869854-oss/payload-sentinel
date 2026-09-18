@@ -551,8 +551,9 @@ class ReportWindow:
                 out = generate_html_report(data, path)
                 record_evidence_file(self._selected_sid, out, "HTML_REPORT")
                 self.window.after(0, lambda: self._on_report_done(out))
-            except Exception as e:
-                self.window.after(0, lambda: self._on_report_error(str(e)))
+            except Exception as exc:
+                msg = str(exc)
+                self.window.after(0, lambda m=msg: self._on_report_error(m))
 
         threading.Thread(target=run, daemon=True).start()
 
@@ -583,8 +584,9 @@ class ReportWindow:
                 out = generate_pdf_report(data, path)
                 record_evidence_file(self._selected_sid, out, "PDF_REPORT")
                 self.window.after(0, lambda: self._on_report_done(out))
-            except Exception as e:
-                self.window.after(0, lambda: self._on_report_error(str(e)))
+            except Exception as exc:
+                msg = str(exc)
+                self.window.after(0, lambda m=msg: self._on_report_error(m))
 
         threading.Thread(target=run, daemon=True).start()
 
@@ -603,8 +605,9 @@ class ReportWindow:
                 out = generate_csv_export(data, path)
                 record_evidence_file(self._selected_sid, out, "CSV_EXPORT")
                 self.window.after(0, lambda: self._on_report_done(out))
-            except Exception as e:
-                self.window.after(0, lambda: self._on_report_error(str(e)))
+            except Exception as exc:
+                msg = str(exc)
+                self.window.after(0, lambda m=msg: self._on_report_error(m))
 
         threading.Thread(target=run, daemon=True).start()
 
@@ -623,8 +626,9 @@ class ReportWindow:
                 out = generate_json_export(data, path)
                 record_evidence_file(self._selected_sid, out, "JSON_EXPORT")
                 self.window.after(0, lambda: self._on_report_done(out))
-            except Exception as e:
-                self.window.after(0, lambda: self._on_report_error(str(e)))
+            except Exception as exc:
+                msg = str(exc)
+                self.window.after(0, lambda m=msg: self._on_report_error(m))
 
         threading.Thread(target=run, daemon=True).start()
 

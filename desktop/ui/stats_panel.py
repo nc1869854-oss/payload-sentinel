@@ -22,7 +22,7 @@ from config.theme import (
     FG_PRIMARY, FG_SECONDARY, FG_ACCENT, FG_SUCCESS,
     FG_MUTED,
     FONT_BODY, FONT_LABEL, FONT_CARD_TITLE, FONT_SMALL, FONT_MONO,
-    PAD_OUTER, PAD_INNER, PAD_SMALL,
+    PAD_OUTER, PAD_INNER, PAD_SMALL, PAD_TINY,
 )
 from ui.widgets import section_header, horizontal_separator
 from analysis.statistics import build_session_summary

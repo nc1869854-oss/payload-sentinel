@@ -464,5 +464,7 @@ class SettingsWindow:
             )
             return
 
+        from ui.firewall_dialog import FirewallRulesDialog
+
         rules = list_application_rules()
         FirewallRulesDialog(self.window, rules)
