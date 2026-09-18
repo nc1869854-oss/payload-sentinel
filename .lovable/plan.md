@@ -1,5 +1,7 @@
 # Payload Capture Suite — Upgrade Plan
 
+The uploaded suite is already advanced and well structured. The work is to complete and finish it, not to rebuild it: keep the existing architecture and fill in what is missing, then hand you a final packaged version.
+
 Two deliverables, built in stages:
 
 1. **The desktop program** (Python/tkinter, Windows) — bug-fixed, feature-expanded, fully offline, restyled in the Cybermon look. Delivered as a downloadable package you run on your PC.
