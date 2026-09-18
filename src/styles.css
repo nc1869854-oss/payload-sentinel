@@ -61,75 +61,101 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/*
+ * Payload Capture Suite — operator console theme.
+ *
+ * Five background depths (d0..d5), three border weights, three text levels,
+ * one blue accent plus four status colours. Dark only: a forensics console is
+ * read in dim rooms and the depth system is what separates the surfaces.
+ */
+
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --radius: 0.25rem;
+
+  /* depth scale */
+  --d0: oklch(0.17 0.028 254);
+  --d1: oklch(0.21 0.032 254);
+  --d2: oklch(0.245 0.034 254);
+  --d3: oklch(0.285 0.038 254);
+  --d4: oklch(0.33 0.044 254);
+  --d5: oklch(0.38 0.05 254);
+
+  /* border weights */
+  --b0: oklch(0.29 0.032 254);
+  --b1: oklch(0.36 0.04 254);
+  --b2: oklch(0.47 0.055 252);
+
+  /* text levels */
+  --t1: oklch(0.93 0.015 245);
+  --t2: oklch(0.72 0.03 248);
+  --t3: oklch(0.56 0.035 250);
+
+  /* accent + status */
+  --accent-blue: oklch(0.68 0.145 244);
+  --accent-blue-soft: oklch(0.52 0.12 246);
+  --ok: oklch(0.72 0.16 156);
+  --wa: oklch(0.79 0.155 78);
+  --er: oklch(0.65 0.19 22);
+  --in: oklch(0.7 0.13 285);
+
+  /* shadcn semantic mapping */
+  --background: var(--d1);
+  --foreground: var(--t1);
+  --card: var(--d2);
+  --card-foreground: var(--t1);
+  --popover: var(--d3);
+  --popover-foreground: var(--t1);
+  --primary: var(--accent-blue);
+  --primary-foreground: oklch(0.16 0.03 254);
+  --secondary: var(--d3);
+  --secondary-foreground: var(--t1);
+  --muted: var(--d3);
+  --muted-foreground: var(--t2);
+  --accent: var(--d4);
+  --accent-foreground: var(--t1);
+  --destructive: var(--er);
+  --destructive-foreground: oklch(0.97 0.01 250);
+  --border: var(--b1);
+  --input: var(--b1);
+  --ring: var(--accent-blue);
+  --chart-1: var(--accent-blue);
+  --chart-2: var(--ok);
+  --chart-3: var(--wa);
+  --chart-4: var(--er);
+  --chart-5: var(--in);
+  --sidebar: var(--d0);
+  --sidebar-foreground: var(--t2);
+  --sidebar-primary: var(--accent-blue);
+  --sidebar-primary-foreground: oklch(0.16 0.03 254);
+  --sidebar-accent: var(--d3);
+  --sidebar-accent-foreground: var(--t1);
+  --sidebar-border: var(--b0);
+  --sidebar-ring: var(--accent-blue);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-d0: var(--d0);
+  --color-d1: var(--d1);
+  --color-d2: var(--d2);
+  --color-d3: var(--d3);
+  --color-d4: var(--d4);
+  --color-d5: var(--d5);
+  --color-hair: var(--b0);
+  --color-edge: var(--b1);
+  --color-focus: var(--b2);
+  --color-t1: var(--t1);
+  --color-t2: var(--t2);
+  --color-t3: var(--t3);
+  --color-ok: var(--ok);
+  --color-wa: var(--wa);
+  --color-er: var(--er);
+  --color-in: var(--in);
+  --font-data: "JetBrains Mono", ui-monospace, monospace;
+  --font-ui: "Rajdhani", "Segoe UI", sans-serif;
 }
 
 @layer base {
@@ -137,8 +163,105 @@
     border-color: var(--color-border);
   }
 
+  html {
+    color-scheme: dark;
+  }
+
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--d1);
+    color: var(--t1);
+    font-family: var(--font-ui);
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Numeric and address data is always monospace so columns line up. */
+  table,
+  code,
+  pre {
+    font-family: var(--font-data);
+  }
+
+  ::selection {
+    background: var(--accent-blue-soft);
+    color: var(--t1);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--d1);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--d4);
+    border: 2px solid var(--d1);
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--d5);
   }
 }
+
+/* Uppercase micro-label used on every panel header and table head. */
+@utility label-caps {
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--t3);
+}
+
+/* Faint scan-grid used behind hero areas. */
+@utility grid-field {
+  background-image:
+    linear-gradient(var(--b0) 1px, transparent 1px),
+    linear-gradient(90deg, var(--b0) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+}
+
+@utility pulse-dot {
+  animation: pcs-pulse 2s ease-in-out infinite;
+}
+
+@keyframes pcs-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@utility sweep-line {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--accent-blue-soft),
+      transparent
+    );
+    opacity: 0.25;
+    transform: translateX(-100%);
+    animation: pcs-sweep 2.4s linear infinite;
+  }
+}
+
+@keyframes pcs-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+

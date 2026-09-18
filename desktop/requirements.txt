@@ -1,0 +1,34 @@
+# Payload Capture Suite — Python dependencies
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# On Windows, also install Npcap from https://npcap.com
+# before using live packet capture.
+
+# ── Core capture and analysis ─────────────────────────────────────────────────
+scapy>=2.5.0          # Packet capture, PCAP import/export, protocol parsing
+
+# ── Report generation ─────────────────────────────────────────────────────────
+reportlab>=4.0.0      # PDF report generation
+
+# ── Build / packaging (dev only — not needed to run from source) ──────────────
+# pyinstaller>=6.0.0  # Uncomment when building the Windows exe
+
+# ── Standard library modules used (listed for reference — no install needed) ──
+# tkinter        — GUI framework (bundled with Python on Windows)
+# sqlite3        — Embedded database
+# ipaddress      — IP address classification
+# hashlib        — SHA-256 hashing
+# threading      — Background capture thread
+# queue          — Thread-safe packet queue
+# csv            — CSV export
+# json           — JSON export / settings
+# zipfile        — CSV zip archive
+# pathlib        — Cross-platform file paths
+# subprocess     — netsh firewall commands
+# socket         — Reverse DNS lookups
+# logging        — Application log
+# datetime       — Timestamps
+# math           — Shannon entropy calculation
+# collections    — defaultdict, Counter
