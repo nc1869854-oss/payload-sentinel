@@ -7,56 +7,81 @@ All windows import from here so the application looks consistent.
 Changing a value here changes it everywhere.
 """
 
+# ─── Depth system (Cybermon palette) ─────────────────────────────────────────
+# Five distinct background levels, three border weights, three text levels,
+# one blue accent plus four status colours. No pure black anywhere.
+
+D0 = "#060b12"   # window chrome / title strip
+D1 = "#0b1220"   # sidebar + toolbar
+D2 = "#0f1826"   # main workspace background
+D3 = "#131f30"   # cards and panels
+D4 = "#192840"   # elevated: inspectors, modals, tooltips
+D5 = "#1e3050"   # hover / selected
+
+B0 = "#162032"   # hairline separator
+B1 = "#1e2e42"   # standard border
+B2 = "#28405a"   # emphatic / focus ring
+
+
 # ─── Colour Palette ──────────────────────────────────────────────────────────
 
 # Backgrounds
-BG_DARK       = "#0d1117"   # main window / panel background
-BG_CARD       = "#161b22"   # card / widget container
-BG_HEADER     = "#0d1117"   # top header bar
-BG_SIDEBAR    = "#010409"   # sidebar (future use)
-BG_INPUT      = "#21262d"   # text-entry fields
-BG_TABLE_ROW  = "#161b22"   # even table rows
-BG_TABLE_ALT  = "#1c2128"   # odd (alternating) rows
-BG_SELECTED   = "#1f6feb"   # highlighted / selected row
+BG_CHROME     = D0          # outer window chrome
+BG_DARK       = D2          # main window / panel background
+BG_CARD       = D3          # card / widget container
+BG_HEADER     = D1          # top header bar
+BG_SIDEBAR    = D1          # sidebar
+BG_ELEVATED   = D4          # inspector / modal surface
+BG_INPUT      = D4          # text-entry fields
+BG_TABLE_ROW  = D3          # even table rows
+BG_TABLE_ALT  = "#111c2c"   # odd (alternating) rows
+BG_HOVER      = D5          # hover state
+BG_SELECTED   = D5          # highlighted / selected row
 
 # Foreground / text
-FG_PRIMARY    = "#e6edf3"   # primary text
-FG_SECONDARY  = "#8b949e"   # secondary / dimmed text
-FG_ACCENT     = "#58a6ff"   # links, accent highlights
-FG_SUCCESS    = "#3fb950"   # green  — healthy / active
-FG_WARNING    = "#d29922"   # orange — medium risk / warning
-FG_DANGER     = "#f85149"   # red    — high / critical
-FG_INFO       = "#79c0ff"   # blue   — informational
-FG_MUTED      = "#484f58"   # borders, separators
+FG_PRIMARY    = "#c4d4e8"   # primary text
+FG_SECONDARY  = "#8195ad"   # secondary / dimmed text
+FG_ACCENT     = "#2b96d4"   # links, accent highlights
+FG_SUCCESS    = "#29a86a"   # green  — healthy / active
+FG_WARNING    = "#d49a2b"   # orange — medium risk / warning
+FG_DANGER     = "#d44f4f"   # red    — high / critical
+FG_INFO       = "#7c86e0"   # indigo — informational
+FG_MUTED      = "#475f78"   # borders, separators, disabled
+
+# Borders (semantic aliases)
+BORDER_HAIR   = B0
+BORDER        = B1
+BORDER_FOCUS  = B2
 
 # Severity colours (maps severity label → colour)
 SEVERITY_COLORS = {
-    "INFO":     "#58a6ff",   # blue
-    "LOW":      "#3fb950",   # green
-    "MEDIUM":   "#d29922",   # orange
-    "HIGH":     "#f85149",   # red
-    "CRITICAL": "#ff0000",   # bright red
+    "INFO":     FG_INFO,
+    "LOW":      FG_SUCCESS,
+    "MEDIUM":   FG_WARNING,
+    "HIGH":     FG_DANGER,
+    "CRITICAL": "#f06060",
 }
 
 # Risk colours for packet table
 RISK_COLORS = {
-    "LOW":      "#3fb950",
-    "MEDIUM":   "#d29922",
-    "HIGH":     "#f85149",
-    "CRITICAL": "#ff0000",
-    "NONE":     "#8b949e",
+    "LOW":      FG_SUCCESS,
+    "MEDIUM":   FG_WARNING,
+    "HIGH":     FG_DANGER,
+    "CRITICAL": "#f06060",
+    "NONE":     FG_SECONDARY,
 }
 
 # Status indicator colours
-STATUS_ACTIVE   = "#3fb950"   # ● green
-STATUS_IDLE     = "#8b949e"   # ● grey
-STATUS_PAUSED   = "#d29922"   # ● orange
-STATUS_ERROR    = "#f85149"   # ● red
+STATUS_ACTIVE   = FG_SUCCESS
+STATUS_IDLE     = FG_SECONDARY
+STATUS_PAUSED   = FG_WARNING
+STATUS_ERROR    = FG_DANGER
+
 
 
 # ─── Typography ──────────────────────────────────────────────────────────────
 
-FONT_FAMILY     = "Consolas"       # monospace; good for IPs and data
+FONT_FAMILY     = "Cascadia Mono"  # monospace; good for IPs and data
 FONT_FAMILY_UI  = "Segoe UI"       # proportional; good for labels
 
 FONT_HEADER     = (FONT_FAMILY_UI, 22, "bold")
