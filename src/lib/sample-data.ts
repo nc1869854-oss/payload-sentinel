@@ -503,7 +503,7 @@ export type DnsRecord = {
 export const DNS_RECORDS: DnsRecord[] = [
   { time: "22:04:19", query: "www.google.com", type: "A", answer: "142.250.192.78", resolver: "1.1.1.1", count: 34, verdict: "OK", note: "Well-known search service" },
   { time: "22:05:02", query: "outlook.office365.com", type: "A", answer: "13.107.42.14", resolver: "1.1.1.1", count: 96, verdict: "OK", note: "Mail client polling" },
-  { time: "22:11:44", query: "k3f8a91c2e7b4d6a.hosted-metrics.io", type: "TXT", answer: "v=1;d=QUJDREVGR0hJ…", type2: undefined as never, count: 316, resolver: "1.1.1.1", verdict: "SUSPICIOUS", note: "Long random label, TXT answers — tunnelling pattern" },
+  { time: "22:11:44", query: "k3f8a91c2e7b4d6a.hosted-metrics.io", type: "TXT", answer: "v=1;d=QUJDREVGR0hJ…", resolver: "1.1.1.1", count: 316, verdict: "SUSPICIOUS", note: "Long random label, TXT answers — tunnelling pattern" },
   { time: "22:19:07", query: "sync-node-4.cdn-relay.net", type: "A", answer: "203.0.113.47", resolver: "1.1.1.1", count: 84, verdict: "BLOCKED", note: "Beacon destination; blocked after triage" },
   { time: "22:26:31", query: "github.com", type: "A", answer: "140.82.113.4", resolver: "1.1.1.1", count: 12, verdict: "OK", note: "Developer tooling" },
   { time: "22:34:58", query: "s3.eu-west-1.amazonaws.com", type: "A", answer: "52.94.236.248", resolver: "1.1.1.1", count: 41, verdict: "SUSPICIOUS", note: "Large uploads followed this lookup" },
@@ -511,7 +511,7 @@ export const DNS_RECORDS: DnsRecord[] = [
   { time: "22:52:40", query: "assets.cloudfront-edge.net", type: "CNAME", answer: "104.18.32.115", resolver: "1.1.1.1", count: 58, verdict: "OK", note: "Content delivery" },
   { time: "23:03:15", query: "wpad.localdomain", type: "A", answer: "NXDOMAIN", resolver: "192.168.1.1", count: 22, verdict: "SUSPICIOUS", note: "Proxy auto-discovery; spoofable on local networks" },
   { time: "23:18:49", query: "one.one.one.one", type: "AAAA", answer: "2606:4700:4700::1111", resolver: "1.1.1.1", count: 4, verdict: "OK", note: "Resolver self-check" },
-] as unknown as DnsRecord[];
+];
 
 /* ── timeline ────────────────────────────────────────────────────────────── */
 
