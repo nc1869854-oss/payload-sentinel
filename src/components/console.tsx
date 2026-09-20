@@ -19,9 +19,9 @@ export function Panel({
   className,
   bodyClassName,
 }: {
-  title?: string;
-  hint?: string;
-  actions?: ReactNode;
+  title?: string | undefined;
+  hint?: string | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
   className?: string;
   bodyClassName?: string;
@@ -88,8 +88,8 @@ export function StatCard({
 }: {
   label: string;
   value: string | number;
-  unit?: string;
-  sub?: string;
+  unit?: string | undefined;
+  sub?: string | undefined;
   tone?: "neutral" | "accent" | "ok" | "wa" | "er";
   icon?: ReactNode;
 }) {
@@ -254,7 +254,7 @@ export function Row({
   children: ReactNode;
   onClick?: () => void;
   selected?: boolean;
-  tone?: "er" | "wa" | "ok" | "in";
+  tone?: "er" | "wa" | "ok" | "in" | undefined;
 }) {
   const accent = tone
     ? { er: "border-l-er", wa: "border-l-wa", ok: "border-l-ok", in: "border-l-in" }[tone]
