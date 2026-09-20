@@ -34,7 +34,7 @@ export const Route = createFileRoute("/capture")({
       },
     ],
   }),
-  component: CapturePage;
+  component: CapturePage,
 });
 
 const ADAPTERS = [
