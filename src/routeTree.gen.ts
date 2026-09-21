@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as CaptureRouteImport } from './routes/capture'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as PacketsRouteImport } from './routes/packets'
@@ -17,6 +18,11 @@ import { Route as PacketsRouteImport } from './routes/packets'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlertsRoute = AlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaptureRoute = CaptureRouteImport.update({
@@ -37,12 +43,14 @@ const PacketsRoute = PacketsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/flows': typeof FlowsRoute
   '/packets': typeof PacketsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/flows': typeof FlowsRoute
   '/packets': typeof PacketsRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/flows': typeof FlowsRoute
   '/packets': typeof PacketsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/capture' | '/flows' | '/packets'
+  fullPaths: '/' | '/alerts' | '/capture' | '/flows' | '/packets'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/capture' | '/flows' | '/packets'
-  id: '__root__' | '/' | '/capture' | '/flows' | '/packets'
+  to: '/' | '/alerts' | '/capture' | '/flows' | '/packets'
+  id: '__root__' | '/' | '/alerts' | '/capture' | '/flows' | '/packets'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertsRoute: typeof AlertsRoute
   CaptureRoute: typeof CaptureRoute
   FlowsRoute: typeof FlowsRoute
   PacketsRoute: typeof PacketsRoute
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alerts': {
+      id: '/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof AlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/capture': {
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertsRoute: AlertsRoute,
   CaptureRoute: CaptureRoute,
   FlowsRoute: FlowsRoute,
   PacketsRoute: PacketsRoute,
