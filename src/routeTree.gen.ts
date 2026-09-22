@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as CaptureRouteImport } from './routes/capture'
 import { Route as DnsRouteImport } from './routes/dns'
+import { Route as FirewallRouteImport } from './routes/firewall'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as IntelRouteImport } from './routes/intel'
 import { Route as PacketsRouteImport } from './routes/packets'
@@ -37,6 +38,11 @@ const CaptureRoute = CaptureRouteImport.update({
 const DnsRoute = DnsRouteImport.update({
   id: '/dns',
   path: '/dns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FirewallRoute = FirewallRouteImport.update({
+  id: '/firewall',
+  path: '/firewall',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FlowsRoute = FlowsRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/capture'
     | '/dns'
+    | '/firewall'
     | '/flows'
     | '/intel'
     | '/packets'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/capture'
     | '/dns'
+    | '/firewall'
     | '/flows'
     | '/intel'
     | '/packets'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/alerts'
     | '/capture'
     | '/dns'
+    | '/firewall'
     | '/flows'
     | '/intel'
     | '/packets'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AlertsRoute: typeof AlertsRoute
   CaptureRoute: typeof CaptureRoute
   DnsRoute: typeof DnsRoute
+  FirewallRoute: typeof FirewallRoute
   FlowsRoute: typeof FlowsRoute
   IntelRoute: typeof IntelRoute
   PacketsRoute: typeof PacketsRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/dns'
       fullPath: '/dns'
       preLoaderRoute: typeof DnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/firewall': {
+      id: '/firewall'
+      path: '/firewall'
+      fullPath: '/firewall'
+      preLoaderRoute: typeof FirewallRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flows': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlertsRoute: AlertsRoute,
   CaptureRoute: CaptureRoute,
   DnsRoute: DnsRoute,
+  FirewallRoute: FirewallRoute,
   FlowsRoute: FlowsRoute,
   IntelRoute: IntelRoute,
   PacketsRoute: PacketsRoute,
