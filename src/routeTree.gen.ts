@@ -18,6 +18,7 @@ import { Route as FirewallRouteImport } from './routes/firewall'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as IntelRouteImport } from './routes/intel'
 import { Route as PacketsRouteImport } from './routes/packets'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as TimelineRouteImport } from './routes/timeline'
 
@@ -66,6 +67,11 @@ const PacketsRoute = PacketsRouteImport.update({
   path: '/packets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
   '/timeline': typeof TimelineRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/flows'
     | '/intel'
     | '/packets'
+    | '/reports'
     | '/search'
     | '/timeline'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/flows'
     | '/intel'
     | '/packets'
+    | '/reports'
     | '/search'
     | '/timeline'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/flows'
     | '/intel'
     | '/packets'
+    | '/reports'
     | '/search'
     | '/timeline'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   FlowsRoute: typeof FlowsRoute
   IntelRoute: typeof IntelRoute
   PacketsRoute: typeof PacketsRoute
+  ReportsRoute: typeof ReportsRoute
   SearchRoute: typeof SearchRoute
   TimelineRoute: typeof TimelineRoute
 }
@@ -238,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PacketsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   FlowsRoute: FlowsRoute,
   IntelRoute: IntelRoute,
   PacketsRoute: PacketsRoute,
+  ReportsRoute: ReportsRoute,
   SearchRoute: SearchRoute,
   TimelineRoute: TimelineRoute,
 }
