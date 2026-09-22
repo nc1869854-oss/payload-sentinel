@@ -13,9 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as CaptureRouteImport } from './routes/capture'
 import { Route as DnsRouteImport } from './routes/dns'
+import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as FirewallRouteImport } from './routes/firewall'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as IntelRouteImport } from './routes/intel'
 import { Route as PacketsRouteImport } from './routes/packets'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as TimelineRouteImport } from './routes/timeline'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +42,16 @@ const DnsRoute = DnsRouteImport.update({
   path: '/dns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvidenceRoute = EvidenceRouteImport.update({
+  id: '/evidence',
+  path: '/evidence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FirewallRoute = FirewallRouteImport.update({
+  id: '/firewall',
+  path: '/firewall',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlowsRoute = FlowsRouteImport.update({
   id: '/flows',
   path: '/flows',
@@ -52,24 +67,49 @@ const PacketsRoute = PacketsRouteImport.update({
   path: '/packets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/evidence': typeof EvidenceRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
+  '/search': typeof SearchRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/evidence': typeof EvidenceRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
+  '/search': typeof SearchRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,25 +117,58 @@ export interface FileRoutesById {
   '/alerts': typeof AlertsRoute
   '/capture': typeof CaptureRoute
   '/dns': typeof DnsRoute
+  '/evidence': typeof EvidenceRoute
+  '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/reports': typeof ReportsRoute
+  '/search': typeof SearchRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/alerts' | '/capture' | '/dns' | '/flows' | '/intel' | '/packets'
+    | '/'
+    | '/alerts'
+    | '/capture'
+    | '/dns'
+    | '/evidence'
+    | '/firewall'
+    | '/flows'
+    | '/intel'
+    | '/packets'
+    | '/reports'
+    | '/search'
+    | '/timeline'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alerts' | '/capture' | '/dns' | '/flows' | '/intel' | '/packets'
+  to:
+    | '/'
+    | '/alerts'
+    | '/capture'
+    | '/dns'
+    | '/evidence'
+    | '/firewall'
+    | '/flows'
+    | '/intel'
+    | '/packets'
+    | '/reports'
+    | '/search'
+    | '/timeline'
   id:
     | '__root__'
     | '/'
     | '/alerts'
     | '/capture'
     | '/dns'
+    | '/evidence'
+    | '/firewall'
     | '/flows'
     | '/intel'
     | '/packets'
+    | '/reports'
+    | '/search'
+    | '/timeline'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,9 +176,14 @@ export interface RootRouteChildren {
   AlertsRoute: typeof AlertsRoute
   CaptureRoute: typeof CaptureRoute
   DnsRoute: typeof DnsRoute
+  EvidenceRoute: typeof EvidenceRoute
+  FirewallRoute: typeof FirewallRoute
   FlowsRoute: typeof FlowsRoute
   IntelRoute: typeof IntelRoute
   PacketsRoute: typeof PacketsRoute
+  ReportsRoute: typeof ReportsRoute
+  SearchRoute: typeof SearchRoute
+  TimelineRoute: typeof TimelineRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -138,6 +216,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DnsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evidence': {
+      id: '/evidence'
+      path: '/evidence'
+      fullPath: '/evidence'
+      preLoaderRoute: typeof EvidenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/firewall': {
+      id: '/firewall'
+      path: '/firewall'
+      fullPath: '/firewall'
+      preLoaderRoute: typeof FirewallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/flows': {
       id: '/flows'
       path: '/flows'
@@ -159,6 +251,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PacketsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -167,9 +280,14 @@ const rootRouteChildren: RootRouteChildren = {
   AlertsRoute: AlertsRoute,
   CaptureRoute: CaptureRoute,
   DnsRoute: DnsRoute,
+  EvidenceRoute: EvidenceRoute,
+  FirewallRoute: FirewallRoute,
   FlowsRoute: FlowsRoute,
   IntelRoute: IntelRoute,
   PacketsRoute: PacketsRoute,
+  ReportsRoute: ReportsRoute,
+  SearchRoute: SearchRoute,
+  TimelineRoute: TimelineRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
