@@ -16,6 +16,7 @@ import { Route as DnsRouteImport } from './routes/dns'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as IntelRouteImport } from './routes/intel'
 import { Route as PacketsRouteImport } from './routes/packets'
+import { Route as TimelineRouteImport } from './routes/timeline'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const PacketsRoute = PacketsRouteImport.update({
   path: '/packets',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,13 +88,29 @@ export interface FileRoutesById {
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
   '/packets': typeof PacketsRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/alerts' | '/capture' | '/dns' | '/flows' | '/intel' | '/packets'
+    | '/'
+    | '/alerts'
+    | '/capture'
+    | '/dns'
+    | '/flows'
+    | '/intel'
+    | '/packets'
+    | '/timeline'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/alerts' | '/capture' | '/dns' | '/flows' | '/intel' | '/packets'
+  to:
+    | '/'
+    | '/alerts'
+    | '/capture'
+    | '/dns'
+    | '/flows'
+    | '/intel'
+    | '/packets'
+    | '/timeline'
   id:
     | '__root__'
     | '/'
@@ -96,6 +120,7 @@ export interface FileRouteTypes {
     | '/flows'
     | '/intel'
     | '/packets'
+    | '/timeline'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +131,7 @@ export interface RootRouteChildren {
   FlowsRoute: typeof FlowsRoute
   IntelRoute: typeof IntelRoute
   PacketsRoute: typeof PacketsRoute
+  TimelineRoute: typeof TimelineRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -159,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PacketsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -170,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   FlowsRoute: FlowsRoute,
   IntelRoute: IntelRoute,
   PacketsRoute: PacketsRoute,
+  TimelineRoute: TimelineRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
