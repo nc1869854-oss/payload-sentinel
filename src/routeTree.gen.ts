@@ -20,6 +20,7 @@ import { Route as IntelRouteImport } from './routes/intel'
 import { Route as PacketsRouteImport } from './routes/packets'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TimelineRouteImport } from './routes/timeline'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +78,11 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
+  '/settings': typeof SettingsRoute
   '/timeline': typeof TimelineRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/packets'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/timeline'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/packets'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/timeline'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/packets'
     | '/reports'
     | '/search'
+    | '/settings'
     | '/timeline'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +195,7 @@ export interface RootRouteChildren {
   PacketsRoute: typeof PacketsRoute
   ReportsRoute: typeof ReportsRoute
   SearchRoute: typeof SearchRoute
+  SettingsRoute: typeof SettingsRoute
   TimelineRoute: typeof TimelineRoute
 }
 
@@ -265,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timeline': {
       id: '/timeline'
       path: '/timeline'
@@ -287,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   PacketsRoute: PacketsRoute,
   ReportsRoute: ReportsRoute,
   SearchRoute: SearchRoute,
+  SettingsRoute: SettingsRoute,
   TimelineRoute: TimelineRoute,
 }
 export const routeTree = rootRouteImport
