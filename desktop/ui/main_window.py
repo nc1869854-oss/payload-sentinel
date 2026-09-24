@@ -59,6 +59,10 @@ class MainWindow:
         self._build_ui()
         self._tick()   # start the 1-second clock
 
+        # Register safe-shutdown so a capture in progress is stopped cleanly
+        # before the window is destroyed.
+        self.root.protocol("WM_DELETE_WINDOW", self._on_close)
+
     # ── UI Construction ───────────────────────────────────────────────────────
 
     def _build_ui(self) -> None:
@@ -613,6 +617,42 @@ class MainWindow:
     def _open_settings(self) -> None:
         from ui.settings_window import SettingsWindow
         SettingsWindow(self.root)
+
+    def _on_close(self) -> None:
+        """
+        Safe shutdown — stop any running capture, close the session,
+        then destroy the window.
+
+        Called when the user clicks the window's close button.  Replaces
+        the bare ``root.destroy`` that main.py would otherwise use, so a
+        capture thread or an open child window never gets orphaned.
+        """
+        log.info("MainWindow safe-shutdown initiated")
+
+        # Stop a live capture if one is running
+        if (self._capture_window
+                and self._capture_window.window.winfo_exists()):
+            try:
+                self._capture_window._engine.stop()
+            except Exception as exc:
+                log.warning("Error stopping capture on shutdown: %s", exc)
+
+        # Close the active session (saves state to the database)
+        if self._session:
+            try:
+                db.log_action(self._session.session_id, "SESSION_CLOSED")
+                self._session.close()
+            except Exception as exc:
+                log.warning("Error closing session on shutdown: %s", exc)
+
+        # Persist settings
+        try:
+            import config.settings as settings
+            settings.save()
+        except Exception as exc:
+            log.warning("Error saving settings on shutdown: %s", exc)
+
+        self.root.destroy()
 
     def _open_about(self) -> None:
         """Owner details, social profiles and the bundled legal documents."""

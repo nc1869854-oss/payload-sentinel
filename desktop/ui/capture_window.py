@@ -387,8 +387,14 @@ class CaptureWindow:
 
         try:
             self._engine.start(interface=iface, bpf_filter=bpf)
+        except RuntimeError as e:
+            # Missing Scapy or capture driver — clear, pre-checked message
+            messagebox.showerror("Cannot Start Capture", str(e),
+                                parent=self.window)
+            return
         except Exception as e:
-            messagebox.showerror("Capture Error", str(e), parent=self.window)
+            messagebox.showerror("Capture Error", str(e),
+                                parent=self.window)
             return
 
         self._update_capture_status()

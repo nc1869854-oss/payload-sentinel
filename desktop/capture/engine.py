@@ -67,9 +67,53 @@ class CaptureEngine:
                      None = Scapy default (usually the first available)
         bpf_filter : BPF filter string (e.g. "tcp port 80")
                      Empty string = capture everything
+
+        Raises
+        ------
+        RuntimeError
+            If Scapy is not installed, or if the capture driver (Npcap on
+            Windows) is missing.  The caller should catch this and show a
+            user-friendly dialog instead of letting the thread die silently.
         """
         if self._is_capturing:
             return   # already running
+
+        if not SCAPY_AVAILABLE:
+            raise RuntimeError(
+                "Scapy is not installed.\n\n"
+                "Install it with:  pip install scapy\n\n"
+                "Npcap is also required on Windows:\n"
+                "    https://npcap.com"
+            )
+
+        # ── Pre-flight: detect missing capture driver on Windows ───────────
+        # Scapy can be installed without Npcap; sniff() would then fail with
+        # a cryptic "WinPcap/Npcap not found" error.  Check up front so the
+        # user gets a clear, actionable message.
+        import sys as _sys
+        if _sys.platform == "win32":
+            driver_ok = False
+            try:
+                import winreg
+                for key_path in (r"SOFTWARE\\Npcap", r"SOFTWARE\\WinPcap"):
+                    try:
+                        handle = winreg.OpenKey(
+                            winreg.HKEY_LOCAL_MACHINE, key_path)
+                        winreg.CloseKey(handle)
+                        driver_ok = True
+                        break
+                    except (FileNotFoundError, OSError):
+                        pass
+            except ImportError:
+                pass   # winreg only exists on Windows
+            if not driver_ok:
+                raise RuntimeError(
+                    "No packet capture driver found.\n\n"
+                    "Npcap is required on Windows for live capture.\n"
+                    "Download it from:  https://npcap.com\n\n"
+                    "You can still import and analyse existing PCAP files "
+                    "without a driver."
+                )
 
         self._stop_event.clear()
         self._is_capturing = True
@@ -125,8 +169,16 @@ class CaptureEngine:
                 store=False,    # don't accumulate packets in memory
             )
         except Exception as e:
-            # Put the error into the queue so the UI can show it
-            self._queue.put(("error", str(e)))
+            # Translate common cryptic errors into clear messages
+            msg = str(e)
+            if "WinPcap" in msg or "Npcap" in msg or "not found" in msg.lower():
+                msg = ("Capture driver error: " + msg +
+                       "\n\nNpcap may not be installed or the service may "
+                       "be stopped. Download from: https://npcap.com")
+            elif "Permission" in msg or "denied" in msg.lower():
+                msg = ("Permission denied: " + msg +
+                       "\n\nTry running the application as administrator.")
+            self._queue.put(("error", msg))
         finally:
             self._is_capturing = False
 

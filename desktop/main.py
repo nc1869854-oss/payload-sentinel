@@ -79,12 +79,10 @@ def main() -> None:
         root.lift()
 
     # ── Graceful exit ─────────────────────────────────────────────────────────
-    def on_close():
-        log.info("Application closing")
-        settings.save()
-        root.destroy()
-
-    root.protocol("WM_DELETE_WINDOW", on_close)
+    # MainWindow registers its own WM_DELETE_WINDOW handler (_on_close) that
+    # stops any running capture, closes the session and saves settings before
+    # destroying the root.  We only need a fallback here in case the window
+    # was never created (e.g. a startup error path).
     root.mainloop()
     log.info("Application exited cleanly")
 

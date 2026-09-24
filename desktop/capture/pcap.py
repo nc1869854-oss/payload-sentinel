@@ -73,13 +73,51 @@ class PcapImporter:
         if not path.exists():
             return 0, f"File not found: {path}"
 
+        # ── Validate the file before attempting to parse it ───────────────
+        # A truncated or non-PCAP file produces a confusing Scapy traceback.
+        # Check the magic number and minimum size up front so the user gets
+        # a clear, actionable message instead.
+        try:
+            file_size = path.stat().st_size
+        except OSError as e:
+            return 0, f"Cannot access file: {e}"
+
+        if file_size == 0:
+            return 0, "The file is empty (0 bytes). Nothing to import."
+
+        # Read the first 4 bytes to check the PCAP / PCAPng magic number.
+        PCAP_MAGIC   = b"\xd4\xc3\xb2\xa1"   # little-endian classic
+        PCAP_MAGIC_BE = b"\xa1\xb2\xc3\xd4"  # big-endian classic
+        PCAPNG_MAGIC = b"\x0a\x0d\x0d\x0a"   # pcapng (same both endians)
+        try:
+            with open(path, "rb") as fh:
+                header = fh.read(4)
+        except OSError as e:
+            return 0, f"Cannot read file header: {e}"
+
+        if header not in (PCAP_MAGIC, PCAP_MAGIC_BE, PCAPNG_MAGIC):
+            return 0, (
+                "This does not look like a valid PCAP or PCAPng file.\n"
+                "The file header does not match any known capture format.\n"
+                "The file may be corrupt, in a different format, or a "
+                "text export rather than a binary capture."
+            )
+
         try:
             # rdpcap loads all packets into memory.
             # For very large files (>500 MB) this can be slow — a future
             # improvement would use PcapReader for streaming.
             packets = rdpcap(str(path))
         except Exception as e:
-            return 0, f"Could not read PCAP file: {e}"
+            msg = str(e)
+            # Distinguish truncation from other parse failures
+            if "truncated" in msg.lower() or "unexpected eof" in msg.lower():
+                return 0, (
+                    "The file appears to be truncated or corrupt — the "
+                    "capture ended before the last packet was fully written.\n"
+                    f"Parser error: {msg}"
+                )
+            return 0, f"Could not read PCAP file: {msg}"
 
         total = len(packets)
         loaded = 0
@@ -188,6 +226,21 @@ def get_pcap_info(file_path: str | pathlib.Path) -> dict:
         return result
 
     result["file_size"] = path.stat().st_size
+
+    # Validate the magic number before attempting a full parse.
+    PCAP_MAGIC    = b"\xd4\xc3\xb2\xa1"
+    PCAP_MAGIC_BE = b"\xa1\xb2\xc3\xd4"
+    PCAPNG_MAGIC  = b"\x0a\x0d\x0d\x0a"
+    try:
+        with open(path, "rb") as fh:
+            header = fh.read(4)
+    except OSError:
+        header = b""
+    if header and header not in (PCAP_MAGIC, PCAP_MAGIC_BE, PCAPNG_MAGIC):
+        result["error"] = (
+            "Not a valid PCAP or PCAPng file — header does not match."
+        )
+        return result
 
     try:
         packets = rdpcap(str(path))

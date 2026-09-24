@@ -17,6 +17,8 @@ import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as FirewallRouteImport } from './routes/firewall'
 import { Route as FlowsRouteImport } from './routes/flows'
 import { Route as IntelRouteImport } from './routes/intel'
+import { Route as LegalRouteImport } from './routes/legal'
+import { Route as OwnerRouteImport } from './routes/owner'
 import { Route as PacketsRouteImport } from './routes/packets'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as SearchRouteImport } from './routes/search'
@@ -63,6 +65,16 @@ const IntelRoute = IntelRouteImport.update({
   path: '/intel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerRoute = OwnerRouteImport.update({
+  id: '/owner',
+  path: '/owner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PacketsRoute = PacketsRouteImport.update({
   id: '/packets',
   path: '/packets',
@@ -98,6 +110,8 @@ export interface FileRoutesByFullPath {
   '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
+  '/legal': typeof LegalRoute
+  '/owner': typeof OwnerRoute
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
@@ -113,6 +127,8 @@ export interface FileRoutesByTo {
   '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
+  '/legal': typeof LegalRoute
+  '/owner': typeof OwnerRoute
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
@@ -129,6 +145,8 @@ export interface FileRoutesById {
   '/firewall': typeof FirewallRoute
   '/flows': typeof FlowsRoute
   '/intel': typeof IntelRoute
+  '/legal': typeof LegalRoute
+  '/owner': typeof OwnerRoute
   '/packets': typeof PacketsRoute
   '/reports': typeof ReportsRoute
   '/search': typeof SearchRoute
@@ -146,6 +164,8 @@ export interface FileRouteTypes {
     | '/firewall'
     | '/flows'
     | '/intel'
+    | '/legal'
+    | '/owner'
     | '/packets'
     | '/reports'
     | '/search'
@@ -161,6 +181,8 @@ export interface FileRouteTypes {
     | '/firewall'
     | '/flows'
     | '/intel'
+    | '/legal'
+    | '/owner'
     | '/packets'
     | '/reports'
     | '/search'
@@ -176,6 +198,8 @@ export interface FileRouteTypes {
     | '/firewall'
     | '/flows'
     | '/intel'
+    | '/legal'
+    | '/owner'
     | '/packets'
     | '/reports'
     | '/search'
@@ -192,6 +216,8 @@ export interface RootRouteChildren {
   FirewallRoute: typeof FirewallRoute
   FlowsRoute: typeof FlowsRoute
   IntelRoute: typeof IntelRoute
+  LegalRoute: typeof LegalRoute
+  OwnerRoute: typeof OwnerRoute
   PacketsRoute: typeof PacketsRoute
   ReportsRoute: typeof ReportsRoute
   SearchRoute: typeof SearchRoute
@@ -257,6 +283,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner': {
+      id: '/owner'
+      path: '/owner'
+      fullPath: '/owner'
+      preLoaderRoute: typeof OwnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/packets': {
       id: '/packets'
       path: '/packets'
@@ -304,6 +344,8 @@ const rootRouteChildren: RootRouteChildren = {
   FirewallRoute: FirewallRoute,
   FlowsRoute: FlowsRoute,
   IntelRoute: IntelRoute,
+  LegalRoute: LegalRoute,
+  OwnerRoute: OwnerRoute,
   PacketsRoute: PacketsRoute,
   ReportsRoute: ReportsRoute,
   SearchRoute: SearchRoute,
